@@ -1,0 +1,81 @@
+<?php 
+$addi = $this->addi;
+$hmsg = @$_GET['hmsg']?:"";
+$id = $addi->getId();
+$tid = $addi->getTravel_id();
+$ttype = Yy_Utils::getTravelTypeByTravelID($tid);
+?>
+<div class="header"> 
+	<h1 class="page-title">
+行程<?php 
+echo "<span style='color:red;'>".$hmsg."</span>";
+?>附加信息详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/travel/detail?type=<?php echo $ttype;?>"><?php echo Yy_Utils::getTravelType($ttype);?>行程列表</a> <span class="divider">/</span></li>
+	<li><a href="/travel/view?id=<?php echo $tid;?>">行程详情</a> <span class="divider">/</span></li>
+	<li><a href="/travel/addidetail?id=<?php echo $tid;?>&hmsg=<?php echo $hmsg;?>">行程附加信息列表</a> <span class="divider">/</span></li>
+	<li class="active">行程附加信息详情</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($addi){?>
+		<table class="table table-bordered table-hover">
+<!--
+		<tr>
+		<td>编号</td>
+		<td><?php echo $addi->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<td style="width:10%">标题</td>
+		<td><?php echo $addi->getTitle();?></td>
+		</tr>
+		<tr>
+		<td>内容</td>
+		<td><?php echo $addi->getContent();?></td>
+		</tr>
+		<tr>
+		<td>图片</td>
+		<td><img src="/travel/addiimage?id=<?php echo $addi->getId();?>" height="120" width="120" /></td>
+		</tr>
+		<tr>
+		<td>排序</td>
+		<td><?php echo $addi->getSort();?></td>
+		</tr>
+		<tr>
+		<td>类型</td>
+		<td><?php echo Yy_Utils::getTravelAddiType($addi->getType());?></td>
+		</tr>	
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $addi->getCtime();?></td>
+		</tr>	
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $addi->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($addi->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+		<div style="width:20%">
+		<a href="/travel/addiupdate?id=<?php echo $addi->getId();?>&hmsg=<?php echo $hmsg;?>" class="btn btn-block">是否修改？</a>
+		<?php 
+		if(@is_numeric($_GET['tid'])){?>
+		<br /><br />
+		<a href="/travel/addiadd?id=<?php echo $_GET['tid'];?>&hmsg=<?php echo $hmsg;?>" class="btn btn-block">继续增加？</a>
+		<?php }?>
+		</div>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

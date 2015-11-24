@@ -1,0 +1,93 @@
+<div class="header"> 
+	<h1 class="page-title">
+	<?php 
+	$action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+	if($action == 'nuser'){
+		echo "普通用户总数:";
+		$role = '/nuser/detail';
+	}elseif($action == 'doctor'){
+		echo "医生总数:";
+		$role = '/doctor/detail';
+	}elseif($action == 'hospital'){
+		echo "医院总数:";
+		$role = '/hospital/detail';
+	}else{
+		echo "总数:";
+	}
+	echo "<span style='color:red;'>".$this->count."</span>";
+	?>
+	</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active">
+            <?php 
+            if($action == 'nuser'){
+            	echo "用户统计";
+            }elseif($action == 'doctor'){
+            	echo "医生统计";
+            }elseif($action == 'hospital'){
+            	echo "医院统计";
+            }else{
+            	echo "统计";
+            }          
+            ?>
+	</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>日期</th>
+		      <th>新增</th> 
+		      <th>详情</th>     
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <?php if(count($this->res)>0){?>
+		    
+		    <?php foreach ($this->res as $record){?>
+		    <tr>
+		      <td><?php echo $record['time'];?></td>
+		      <td><?php echo $record['count'];?></td>
+		      <td><a href="<?php echo $role;?>?date=<?php echo $record['time'];?>">查看</a></td>
+		       </tr>
+		      <?php }?>		   
+		    <?php }else{?>
+		   	<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+		    <?php }?>
+		  </tbody>
+		</table>
+		<div class="pagination" style="text-align: center;">
+		  <ul>
+		  <?php if($this->res->getCurrentPageNumber()<=1){ ?>
+		  <li><a href="/statistics/<?php echo $action;?>?page=<?php echo $this->res->getCurrentPageNumber();?>" class="disabled btn"> 前一页 </a></li>
+		  <?php }else{?>
+		  <li><a href="/statistics/<?php echo $action;?>?page=<?php echo $this->res->getCurrentPageNumber() - 1;?>"> 前一页 </a></li>
+		  <?php }?>
+		    
+		  <?php if($this->res->getCurrentPageNumber()>=$this->res->count()){ ?> 
+		  <li><a href="/statistics/<?php echo $action;?>?page=<?php echo $this->res->getCurrentPageNumber();?>" class="disabled btn"> 后一页</a></li>
+		  <?php }else{ ?> 
+		  <li><a href="/statistics/<?php echo $action;?>?page=<?php echo $this->res->getCurrentPageNumber() + 1;?>"> 后一页</a></li>		  
+		  <?php }?>
+		  </ul>
+		</div>
+		
+
+
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

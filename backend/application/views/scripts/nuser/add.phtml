@@ -1,0 +1,133 @@
+<div class="header"> 
+	<h1 class="page-title">新增用户</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active">新增用户</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<br />
+		<form class="form-horizontal" action="/nuser/updateajax" method="post" enctype="multipart/form-data">
+		  <div class="control-group">
+		    <label class="control-label" for="inputName">姓名</label>
+		    <div class="controls">
+		      <input type="text" id="inputName" placeholder="请输入用户姓名" class="span8" name="name">
+		    </div>
+		  </div>
+
+		   <div class="control-group">
+		    <label class="control-label" for="inputFile">头像</label>
+		    <div class="controls">
+		      <input type="file" id="inputFile" class="span8" name="avatar">
+		    </div>
+		   </div>
+		   
+		    <div class="control-group">
+		    <label class="control-label" for="inputSex">性别</label>
+		    <div class="controls">
+		     <select id="inputSex" name="sex" class="span8">
+			  <option value ="1">男</option>
+			  <option value ="2">女</option>
+			  <option value ="3">未设置</option>
+			</select>
+		    </div>
+		  </div>
+ <div class="control-group">
+    <label class="control-label" for="inputMobile">手机</label>
+    <div class="controls">
+      <input type="text" id="inputMobile" placeholder="请输入用户手机" class="span8" name="mobile">
+    </div>
+  </div>
+ <div class="control-group">
+    <label class="control-label" for="inputEmail">邮箱</label>
+    <div class="controls">
+      <input type="text" id="inputEmail" placeholder="请输入用户邮箱" class="span8" name="email">
+    </div>
+  	</div>	
+  <div class="control-group">
+    <label class="control-label" for="inputPhone">电话</label>
+    <div class="controls">
+      <input type="text" id="inputPhone" placeholder="请输入用户电话" class="span8" name="phone">
+    </div>
+  </div>  	
+  <div class="control-group">
+    <label class="control-label" for="inputPasswd">密码</label>
+    <div class="controls">
+      <input type="password" id="inputPasswd" placeholder="输入用户密码" class="span8" name="passwd" >
+    </div>
+  </div> 
+  <div class="control-group">
+    <label class="control-label" for="inputJob">职业</label>
+    <div class="controls">
+      <input type="text" id="inputJob" placeholder="请输入用户职业" class="span8" name="job">
+    </div>
+  </div>  
+  
+   <div class="control-group">
+    <label class="control-label" for="inputPostcode">邮编</label>
+    <div class="controls">
+      <input type="text" id="inputPostcode" placeholder="请输入用户邮编" class="span8" name="postcode">
+    </div>
+  </div> 
+  
+   <div class="control-group">
+    <label class="control-label" for="inputIdcard">证件号码</label>
+    <div class="controls">
+      <input type="text" id="inputIdcard" placeholder="请输入用户证件号码" class="span8" name="idcard">
+    </div>
+  </div> 
+  
+  <div class="control-group">
+    <label class="control-label" for="inputPoint">积分</label>
+    <div class="controls">
+      <input type="text" id="inputPoint" placeholder="请输入用户积分，默认0" class="span8" name="point">
+    </div>
+  </div>
+  
+   <div class="control-group">
+    <label class="control-label" for="inputCountry">国家</label>
+    <div class="controls">
+      <input type="text" id="inputCountry" placeholder="请输入用户国家" class="span8" name="country">
+    </div>
+  </div> 
+  
+   <div class="control-group">
+    <label class="control-label" for="inputAddress">住址</label>
+    <div class="controls">
+      <input type="text" id="inputAddress" placeholder="请输入用户住址" class="span8" name="address">
+    </div>
+  </div> 
+  
+    <div class="control-group">
+    <label class="control-label" for="inputBirthday">生日</label>
+    <div class="controls">
+      <input type="text" id="inputBirthday" placeholder="请输入用户生日" class="span8" name="birthday">
+    </div>
+  </div>		  
+		  
+		    <div class="control-group">
+		    <label class="control-label" for="inputStatus">状态</label>
+		    <div class="controls">
+		     <select id="inputStatus" name="status" class="span8">
+			  <option value ="1">正常</option>
+			  <option value ="0">禁用</option>
+			</select>
+		    </div>
+		  </div>
+		    <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">保存</button>
+		      <button type="reset" class="btn">重置</button>
+		    </div>
+		  </div>
+		</form>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

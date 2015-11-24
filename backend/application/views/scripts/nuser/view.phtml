@@ -1,0 +1,97 @@
+<?php $nuser = $this->nuser;?>
+<div class="header"> 
+	<h1 class="page-title">用户详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/nuser/detail">用户列表</a> <span class="divider">/</span></li>
+	<li class="active">用户详情</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($nuser){?>
+		<table class="table table-bordered table-hover">
+<!--
+		<tr>
+		<td>编号</td>
+		<td><?php echo $nuser->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<td style="width:10%">姓名</td>
+		<td><?php echo $nuser->getName();?></td>
+		</tr>
+		<tr>
+		<td>头像</td>
+		<td><img src="/nuser/image?id=<?php echo $nuser->getId();?>" height="120" width="120" /></td>
+		</tr>
+		<tr>
+		<td>性别</td>
+		<td><?php if($nuser->getSex()==1){echo "男";}elseif($nuser->getSex()==2){echo '女';}else{echo "未设置";}?></td>
+		</tr>
+		<tr>
+		<td>手机</td>
+		<td><?php echo $nuser->getMobile();?></td>
+		</tr>
+		<tr>
+		<td>邮箱</td>
+		<td><?php echo $nuser->getEmail();?></td>
+		</tr>
+		<tr>
+		<td>电话</td>
+		<td><?php echo $nuser->getPhone();?></td>
+		</tr>
+		<tr>
+		<td>工作</td>
+		<td><?php echo $nuser->getJob();?></td>
+		</tr>
+		<tr>
+		<td>邮编</td>
+		<td><?php echo $nuser->getPostcode();?></td>
+		</tr>
+		<tr>
+		<td>证件号码</td>
+		<td><?php echo $nuser->getIdcard();?></td>
+		</tr>
+		<tr>
+		<td>积分</td>
+		<td><?php echo $nuser->getPoint();?></td>
+		</tr>
+		<tr>
+		<td>国家</td>
+		<td><?php echo $nuser->getCountry();?></td>
+		</tr>
+		<tr>
+		<td>住址</td>
+		<td><?php echo $nuser->getAddress();?></td>
+		</tr>
+		<tr>
+		<td>生日</td>
+		<td><?php echo $nuser->getBirthday();?></td>
+		</tr>
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $nuser->getCtime();?></td>
+		</tr>
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $nuser->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($nuser->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+		<div style="width:20%">	
+		<a href="/nuser/update?id=<?php echo $nuser->getId();?>" class="btn btn-block">是否修改？</a>
+		</div>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

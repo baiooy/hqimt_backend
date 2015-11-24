@@ -1,0 +1,65 @@
+<?php $package = $this->package;?>
+<div class="header"> 
+	<h1 class="page-title">软件包详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/package/detail">软件包列表</a> <span class="divider">/</span></li>
+	<li class="active">软件包详情</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($package){?>
+		<table class="table table-bordered table-hover">
+<!--  	
+		<tr>
+		<td>编号</td>
+		<td><?php echo $package->getId(); ?></td>
+		</tr>
+-->		
+		<tr>
+		<td style="width:10%">包名称</td>
+		<td><?php echo $package->getName();?></td>
+		</tr>
+		<tr>
+		<td>描述</td>
+		<td><?php echo $package->getDescription();?></td>
+		</tr>	
+		<tr>
+		<td>版本</td>
+		<td><?php echo $package->getVersion();?></td>
+		</tr>	
+		<tr>
+		<td>平台</td>
+		<td><?php echo $package->getPlatform();?></td>
+		</tr>	
+		<tr>
+		<td>更新URL</td>
+		<td><?php echo $package->getUrl();?></td>
+		</tr>	
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $package->getCtime();?></td>
+		</tr>	
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $package->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($package->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+<div style="width:20%">		
+		<a href="/package/update?id=<?php echo $package->getId();?>" class="btn btn-block">是否修改？</a>
+</div>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

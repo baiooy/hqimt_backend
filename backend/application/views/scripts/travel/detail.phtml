@@ -1,0 +1,120 @@
+<?php
+$data = $this->data;
+$travels = $data['travels'];
+$pages = $data['pages'];
+$type = $this->type;
+$page = $this->page;
+?>
+<div class="header"> 
+	<h1 class="page-title"><?php echo Yy_Utils::getTravelType($this->type);?>行程列表</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active"><?php echo Yy_Utils::getTravelType($this->type);?>行程列表</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>标题</th>
+		      <th>位置</th>
+		      <th>成人原价</th> 
+		      <th>成人现价</th>
+		      <th>儿童原价</th>
+		      <th>儿童现价</th>
+		      <th>地区</th>   
+		      <th>已卖票数</th>  
+		      <th>详情</th>
+		      <th>修改</th>
+		      <th>删除</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <?php if(count($travels)>0){?>
+		    
+		    <?php foreach ($travels as $record){?>
+		    <tr>
+		      <td><?php echo mb_substr($record->getTitle(), 0,18,'utf-8');?>......</td>
+		      <td><?php echo Yy_Utils::getTravelLType($record->getLocation_type());?></td>
+		      <td><?php echo $record->getAdult_oprice();?></td>
+		      <td><?php echo $record->getAdult_dprice();?></td>
+		      <td><?php echo $record->getChild_oprice();?></td>
+		      <td><?php echo $record->getChild_dprice();?></td>
+		      <td><?php echo $record->getArea();?></td>
+		      <td><?php echo $record->getSales();?></td>		      
+		      <td><a href="/travel/view?id=<?php echo $record->getId();?>">详情</a></td>
+		      <td><a href="/travel/update?id=<?php echo $record->getId();?>">修改</a></td>
+		      <td><a href="#myModal<?php echo $record->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		       </tr>
+<!-- Modal -->
+<div id="myModal<?php echo $record->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除标题为（<?php echo $record->getTitle();?>）的行程</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除标题为（<?php echo $record->getTitle();?>）的行程吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $record->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $record->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/travel/delete",
+				data:"id=<?php echo $record->getId();?>",
+				success:
+					location.reload(),
+			});
+		});
+});
+
+</script>		       
+		      <?php }?>		   
+		    <?php }else{?>
+		   	<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+		    <?php }?>
+		  </tbody>
+		</table>
+		<div class="pagination" style="text-align: center;">
+		  <ul>
+		  <?php if($page<=1){ ?>
+		  <li><a href="/travel/detail?type=<?php echo $type;?>&page=<?php echo $page;?>" class="disabled btn"> 前一页 </a></li>
+		  <?php }else{?>
+		  <li><a href="/travel/detail?type=<?php echo $type;?>&page=<?php echo $page - 1;?>"> 前一页 </a></li>
+		  <?php }?>
+		    
+		  <?php if($page>=$pages){ ?> 
+		  <li><a href="/travel/detail?type=<?php echo $type;?>&page=<?php echo $page;?>" class="disabled btn"> 后一页</a></li>
+		  <?php }else{ ?> 
+		  <li><a href="/travel/detail?type=<?php echo $type;?>&page=<?php echo $page + 1;?>"> 后一页</a></li>		  
+		  <?php }?>
+		  </ul>
+		</div>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

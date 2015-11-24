@@ -1,0 +1,103 @@
+<?php 
+$addi = $this->addi;
+$hmsg = @$_GET['hmsg']?:"";
+$did  = $addi->getDestination_id();
+?>
+<div class="header">
+	<h1 class="page-title">修改医游目的地<?php if($hmsg){echo "<span style='color:red;'>".$hmsg."</span>";}?>附加信息</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/destination/detail">医游目的地列表</a> <span class="divider">/</span></li>
+	<li><a href="/destination/view?id=<?php echo $did;?>">医游目的地详情</a> <span class="divider">/</span></li>
+	<li><a href="/destination/addidetail?id=<?php echo $did;?>&hmsg=<?php echo $hmsg;?>">医游目的地附加信息列表</a> <span class="divider">/</span></li>
+	<li class="active">修改医游目的地附加信息</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+
+<br />
+<form class="form-horizontal" action="/destination/addiasyncajax" method="post" enctype="multipart/form-data">
+
+ <input type="hidden" id="inputId" placeholder="<?php echo $addi->getId();?>" class="span8" name="id" value="<?php echo $addi->getId();?>">
+ <?php if($hmsg){?>
+  <input type="hidden" id="inputHmsg" class="span8" name="hmsg" value="<?php echo $hmsg;?>">
+ <?php }?>
+    <div class="control-group">
+    <label class="control-label" for="inputTitle">标题</label>
+    <div class="controls">
+      <input type="text" id="inputTitle" placeholder="<?php echo $addi->getTitle();?>" class="span8" name="title">
+    </div>
+  	</div>
+  	
+    <div class="control-group">
+    <label class="control-label" for="textareaContent">内容</label>
+    <div class="controls">
+      <textarea id="textareaContent" class="textbox span8" placeholder="<?php echo $addi->getContent();?>" name="content"></textarea>
+    </div>
+  	</div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputSort">排序</label>
+    <div class="controls">
+      <input type="text" id="inputSort" placeholder="<?php echo $addi->getSort();?>" class="span8" name="sort">
+    </div>
+  	</div>
+  <div class="control-group">
+    <label class="control-label" for="inputFile">图片</label>
+    <div class="controls">
+      <input type="file" id="inputFile" class="span8" name="img">
+    </div>
+  </div>
+  <?php 
+  $type = $addi->getType();
+  ?>
+		    <div class="control-group">
+		    <label class="control-label" for="inputType">类型</label>
+		    <div class="controls">
+		     <select id="inputType" name="type" class="span8">
+		  <?php    if($type == 1){ ?>
+			  <option value ="1" selected="selected">医疗概况</option>
+			  <option value ="2">特色景点</option>
+		 <?php }elseif($type == 2){?>
+		 	  <option value ="1">医疗概况</option>
+			  <option value ="2" selected="selected">特色景点</option>
+		 <?php } ?>
+			</select>
+		    </div>
+		  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputStatus">状态</label>
+    <div class="controls">
+     <select id="inputStatus" name="status" class="span8">
+     <?php $status = $addi->getStatus();
+     if($status == 1){
+     ?>
+	  <option value ="1" selected="selected">正常</option>
+	  <option value ="0">禁用</option>
+	  <?php }else{?>
+	  <option value ="1">正常</option>
+	  <option value ="0" selected="selected">禁用</option>
+	  <?php }?>
+	</select>
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">保存</button>
+      <button type="reset" class="btn">重置</button>
+    </div>
+  </div>
+</form>
+
+<footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

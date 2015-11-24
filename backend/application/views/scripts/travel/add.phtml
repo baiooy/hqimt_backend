@@ -1,0 +1,97 @@
+<div class="header"> 
+	<h1 class="page-title">新增<?php echo Yy_Utils::getTravelType($this->type);?>行程</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active">新增<?php echo Yy_Utils::getTravelType($this->type);?>行程</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<br />
+		<form class="form-horizontal" action="/travel/asyncajax" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="inputType" class="span8" name="type" value="<?php echo $this->type;?>">
+		<div class="control-group">
+		    <label class="control-label" for="inputLocation_type">位置</label>
+		    <div class="controls">
+		     <select id="inputLocation_type" name="location_type" class="span8">
+			  <option value ="1" selected="selected">国内</option>
+			  <option value ="2">国外</option>
+			</select>
+		    </div>
+		 </div>
+		
+		  <div class="control-group">
+		    <label class="control-label" for="inputAdult_oprice">成人原价</label>
+		    <div class="controls">
+		      <input type="text" id="inputAdult_oprice" placeholder="请输入成人原价" class="span8" name="adult_oprice">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputAdult_dprice">成人现价</label>
+		    <div class="controls">
+		      <input type="text" id="inputAdult_dprice" placeholder="请输入成人现价" class="span8" name="adult_dprice">
+		    </div>
+		  </div>
+		  		  <div class="control-group">
+		    <label class="control-label" for="inputChild_oprice">儿童原价</label>
+		    <div class="controls">
+		      <input type="text" id="inputChild_oprice" placeholder="请输入儿童原价" class="span8" name="child_oprice">
+		    </div>
+		  </div>
+		  		  <div class="control-group">
+		    <label class="control-label" for="inputChild_dprice">儿童现价</label>
+		    <div class="controls">
+		      <input type="text" id="inputChild_dprice" placeholder="请输入儿童现价" class="span8" name="child_dprice">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputarea">区域</label>
+		    <div class="controls">
+		      <input type="text" id="inputarea" placeholder="请输入区域" class="span8" name="area">
+		    </div>
+		  </div>
+		  		  <div class="control-group">
+		    <label class="control-label" for="inputTitle">大标题</label>
+		    <div class="controls">
+		      <input type="text" id="inputTitle" placeholder="请输入大标题" class="span8" name="title">
+		    </div>
+		  </div>
+		  		  <div class="control-group">
+		    <label class="control-label" for="inputSubtitle">小标题</label>
+		    <div class="controls">
+		      <input type="text" id="inputSubtitle" placeholder="请输入小标题" class="span8" name="subtitle">
+		    </div>
+		  </div>
+		  
+		   <div class="control-group">
+		    <label class="control-label" for="inputFile">图片</label>
+		    <div class="controls">
+		      <input type="file" id="inputFile" class="span8" name="img">
+		    </div>
+		   </div>
+		  
+		    <div class="control-group">
+		    <label class="control-label" for="inputStatus">状态</label>
+		    <div class="controls">
+		     <select id="inputStatus" name="status" class="span8">
+			  <option value ="1" selected="selected">正常</option>
+			  <option value ="0">禁用</option>
+			</select>
+		    </div>
+		  </div>
+		    <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">保存</button>
+		      <button type="reset" class="btn">重置</button>
+		    </div>
+		  </div>
+		</form>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

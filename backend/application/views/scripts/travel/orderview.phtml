@@ -1,0 +1,97 @@
+<?php $order = $this->order;?>
+		<?php 
+		$travel = Application_Model_M_Travel::find($order->getTravel_id());
+		$travelType = $travel->getType();
+		$travelArea = $travel->getArea();
+		$travelTitle = $travel->getTitle();
+		$travelSubtitle = $travel->getSubtitle();
+		?>
+<div class="header"> 
+	<h1 class="page-title">订单详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/travel/order?type=<?php echo $travelType;?>"><?php echo Yy_Utils::getTravelType($travelType)?>行程订单列表</a> <span class="divider">/</span></li>
+	<li class="active">订单详情</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($order){?>
+		<table class="table table-bordered table-hover">
+		<tr>
+		<td>编号</td>
+		<td><?php echo $order->getId(); ?></td>
+		</tr>
+		<tr>
+		<td>订单号</td>
+		<td><?php echo $order->getOrder_id();?></td>
+		</tr>
+		<tr>
+		<td>所属用户</td>
+		<td><?php echo Yy_Utils::getAccount($order->getUid(), $order->getUrole());?></td>
+		</tr>
+		<tr>
+		<td>用户角色</td>
+		<td><?php echo Yy_Utils::getUserRole($order->getUrole());?></td>
+		</tr>
+
+		<tr></tr>
+		<tr>
+		<td>行程类型</td>
+		<td><?php echo Yy_Utils::getTravelType($travelType)?></td>
+		</tr>
+		<tr>
+		<td>行程区域</td>
+		<td><?php echo $travelArea;?></td>
+		</tr>
+		<tr>
+		<td>行程大标题</td>
+		<td><?php echo $travelTitle;?></td>
+		</tr>
+		<tr>
+		<td>行程小标题</td>
+		<td><?php echo $travelSubtitle;?></td>
+		</tr>
+		<tr>
+		<td>成人票数</td>
+		<td><?php echo $order->getAdult_ticket_number();?></td>
+		</tr>
+		<tr>
+		<td>儿童票数</td>
+		<td><?php echo $order->getChild_ticket_number();?></td>
+		</tr>
+		<tr>
+		<td>总价</td>
+		<td><?php echo $order->getTotal_price();?></td>
+		</tr>
+		<tr>
+		<td>支付状态</td>
+		<td><?php if($order->getPayment_status() == 1){echo "已支付";}else{echo "未支付";};?></td>
+		</tr>
+		<tr>
+		<td>支付信息</td>
+		<td><?php echo $order->getRemark();?></td>
+		</tr>
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $order->getCtime();?></td>
+		</tr>
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $order->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($order->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

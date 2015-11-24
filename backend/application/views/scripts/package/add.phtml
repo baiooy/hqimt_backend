@@ -1,0 +1,66 @@
+<div class="header"> 
+	<h1 class="page-title">新增软件包信息</h1>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<br />
+		<form class="form-horizontal" action="/package/asyncajax" method="post" enctype="multipart/form-data">
+		  <div class="control-group">
+		    <label class="control-label" for="inputName">包名称</label>
+		    <div class="controls">
+		      <input type="text" id="inputName" placeholder="请输入软件包名称" class="span8" name="name">
+		    </div>
+		  </div>
+		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputDescription">描述</label>
+		    <div class="controls">
+		      <textarea id="textareaDescription" class="textbox span8" placeholder="请输入描述" name="description"></textarea>
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputVersion">版本</label>
+		    <div class="controls">
+		      <input type="text" id="inputVersion" placeholder="请输入软件包版本" class="span8" name="version">
+		    </div>
+		  </div>		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputPlatform">平台</label>
+		    <div class="controls">
+		     <select id="inputPlatform" name="platform" class="span8">
+			  <option value ="iPhone">iPhone</option>
+			  <option value ="Android">Android</option>
+			</select>
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputUrl">更新URL</label>
+		    <div class="controls">
+		      <input type="text" id="inputUrl" placeholder="请输入软件包更新的URL" class="span8" name="url">
+		    </div>
+		  </div>		  
+		    <div class="control-group">
+		    <label class="control-label" for="inputStatus">状态</label>
+		    <div class="controls">
+		     <select id="inputStatus" name="status" class="span8">
+			  <option value ="1" selected="selected">正常</option>
+			  <option value ="0">禁用</option>
+			</select>
+		    </div>
+		  </div>
+		    <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">保存</button>
+		      <button type="reset" class="btn">重置</button>
+		    </div>
+		  </div>
+		</form>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

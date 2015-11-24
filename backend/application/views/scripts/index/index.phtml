@@ -1,0 +1,61 @@
+<div class="header"> 
+	<h1 class="page-title">欢迎</h1>
+</div>
+<ul class="breadcrumb">
+	<li class="active">Home</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+
+		<h3>您好，<?php echo $this->user;?>，<a href="#myModal" role="button"  data-toggle="modal" class="btn" >点此修改密码</a></h3>
+		<h3>今天是<?php echo $this->day;?>日，<?php echo $this->week;?>。</h3>
+		
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">修改密码</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定修改（<?php echo $this->user;?>）的密码吗？</p>
+   输入密码：<input type="password" name="passwd1" id="passwd1"/>
+    <br />
+   再次确认：<input type="password" name="passwd2" id="passwd2"/>
+  </div>
+  <div class="modal-footer">   
+    <button id="zs" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#zs").click(function(){
+		var passwd1 = $('#passwd1').val();
+		var passwd2 = $('#passwd2').val();
+		if(passwd1 != passwd2){
+			alert("两次输入的密码不一致！");
+		}else{
+			$.ajax({
+				type:"POST",
+				url:"/admin/changepasswd",
+				data:"account=<?php echo $this->user;?>&passwd=" + passwd1,
+				success:function(msg){
+					alert("密码修改成功！请重新登录！");
+					window.location.href='/admin/logout';
+				   }
+			});
+		}
+		
+		});
+});
+
+</script>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

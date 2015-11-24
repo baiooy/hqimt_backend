@@ -1,0 +1,118 @@
+<?php
+$data = $this->data;
+$applys = $data['applys'];
+$pages = $data['pages'];
+$page = $this->page;
+?>
+<div class="header"> 
+	<h1 class="page-title">全球会诊申请列表</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active">全球会诊申请列表</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>邮箱</th> 
+		      <th>手机</th> 
+		      <th>年龄</th>
+		      <th>性别</th>
+		      <th>项目类型</th>
+		      <th>手术项目</th>
+		      <th>详情</th>
+		      <th>删除</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <?php if(count($applys)>0){?>
+		    
+		    <?php foreach ($applys as $record){?>
+		    <tr>
+		      <td><?php echo $record->getEmail();?></td>
+		      <td><?php echo $record->getMobile();?></td>
+		      <td><?php echo $record->getAge();?></td>
+		      <td><?php echo Yy_Utils::getSex($record->getSex());?></td>  
+		      <td><?php echo Yy_Utils::getConsultationDepartmentsCategoryNameByCID($record->getDepartment_category_id());?></td>  
+		      <td><?php echo Yy_Utils::getConsultationDepartmentNameByDID($record->getDepartment_id());?></td>
+		      <td><a href="/diagnosis/applyview?id=<?php echo $record->getId();?>">详情</a></td>
+		      <td><a href="#myModal<?php echo $record->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		       </tr>
+<!-- Modal -->
+<?php 
+if($record->getMobile()){
+	$contact = $record->getMobile();
+}else{
+	$contact = $record->getEmail();
+}
+?>
+<div id="myModal<?php echo $record->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除联系方式为（<?php echo $contact;?>）的申请</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除联系方式为（<?php echo $contact;?>）的申请吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $record->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $record->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/diagnosis/applydel",
+				data:"id=<?php echo $record->getId();?>",
+				success:
+					location.reload(),
+					
+			});
+		});
+});
+
+</script>		       
+		      <?php }?>		   
+		    <?php }else{?>
+		   	<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+		    <?php }?>
+		  </tbody>
+		</table>
+		<div class="pagination" style="text-align: center;">
+		  <ul>
+		  <?php if($page<=1){ ?>
+		  <li><a href="/diagnosis/applydetail?page=<?php echo $page;?>" class="disabled btn"> 前一页 </a></li>
+		  <?php }else{?>
+		  <li><a href="/diagnosis/applydetail?page=<?php echo $page - 1;?>"> 前一页 </a></li>
+		  <?php }?>
+		    
+		  <?php if($page>=$pages){ ?> 
+		  <li><a href="/diagnosis/applydetail?page=<?php echo $page;?>" class="disabled btn"> 后一页</a></li>
+		  <?php }else{ ?> 
+		  <li><a href="/diagnosis/applydetail?page=<?php echo $page + 1;?>"> 后一页</a></li>		  
+		  <?php }?>
+		  </ul>
+		</div>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

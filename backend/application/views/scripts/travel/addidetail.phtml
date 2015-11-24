@@ -1,0 +1,380 @@
+<?php 
+$res1 = $this->res1;
+$res2 = $this->res2;
+$res3 = $this->res3;
+$res4 = $this->res4;
+$res5 = $this->res5;
+$tid  = $this->tid;
+$ttype = Yy_Utils::getTravelTypeByTravelID($tid);
+$hmsg = @$_GET['hmsg']?:"";
+?>
+<div class="header"> 
+	<h1 class="page-title">
+	行程<?php
+	if($hmsg){ 
+		echo "<span style='color:red;'>".$hmsg."</span>";
+	}
+	?>
+附加信息列表</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/travel/detail?type=<?php echo $ttype;?>"><?php echo Yy_Utils::getTravelType($ttype);?>行程列表</a> <span class="divider">/</span></li>
+	<li><a href="/travel/view?id=<?php echo $tid;?>">行程详情</a> <span class="divider">/</span></li>
+	<li class="active">行程附加信息列表</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<!-- 1特色，2详情，3费用，4注意事项，5行程  -->
+		<div class="tabbable">
+		  <ul class="nav nav-pills">
+		    <li class="active"><a href="#tab1" data-toggle="tab">特色</a></li>
+		    <li><a href="#tab2" data-toggle="tab">详情</a></li>
+		    <li><a href="#tab3" data-toggle="tab">费用</a></li>
+		    <li><a href="#tab4" data-toggle="tab">注意事项</a></li>
+		    <li><a href="#tab5" data-toggle="tab">行程</a></li>
+		  </ul>
+		  <div class="tab-content">
+		    <div class="tab-pane active" id="tab1">
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>标题</th>
+		      <th>内容</th>
+		      <th>排序</th>  
+		      <th>详情</th>
+		      <th>修改</th>
+		      <th>删除</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	<?php if(count($res1)>0){?>
+		<?php foreach ($res1 as $res){?>
+		<tr>
+		<td><?php echo mb_substr($res->getTitle(), 0,18,'utf-8');?>......</td>
+		<td><?php echo $res->getContent();?></td>
+		<td><?php echo $res->getSort();?></td>
+		<td><a href="/travel/addiview?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">详情</a></td>
+		<td><a href="/travel/addiupdate?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">修改</a></td>
+		<td><a href="#myModal<?php echo $res->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		</tr>
+<!-- Modal -->
+<div id="myModal<?php echo $res->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除标题为（<?php echo $res->getTitle();?>）的行程附加信息</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除标题为（<?php echo $res->getTitle();?>）的行程附加信息吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $res->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $res->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/travel/addidel",
+				data:"id=<?php echo $res->getId();?>",
+				success:
+					location.reload(),
+			});
+		});
+});
+
+</script>		
+		<?php }?>
+	<?php }else{?>
+			<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+	<?php }?>
+		 </tbody>
+		</table>
+
+		    </div>
+		    <div class="tab-pane" id="tab2">
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>标题</th>
+		      <th>内容</th>
+		      <th>排序</th>  
+		      <th>详情</th>
+		      <th>修改</th>
+		      <th>删除</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	<?php if(count($res2)>0){?>
+		<?php foreach ($res2 as $res){?>
+		<tr>
+		<td><?php echo mb_substr($res->getTitle(), 0,18,'utf-8');?>......</td>
+		<td><?php echo $res->getContent();?></td>
+		<td><?php echo $res->getSort();?></td>
+		<td><a href="/travel/addiview?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">详情</a></td>
+		<td><a href="/travel/addiupdate?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">修改</a></td>
+		<td><a href="#myModal<?php echo $res->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		</tr>
+<!-- Modal -->
+<div id="myModal<?php echo $res->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除标题为（<?php echo $res->getTitle();?>）的行程附加信息</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除标题为（<?php echo $res->getTitle();?>）的行程附加信息吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $res->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $res->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/travel/addidel",
+				data:"id=<?php echo $res->getId();?>",
+				success:
+					location.reload(),
+			});
+		});
+});
+
+</script>		
+		<?php }?>
+	<?php }else{?>
+			<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+	<?php }?>
+		 </tbody>
+		</table>
+		    </div>
+		    <div class="tab-pane" id="tab3">
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>标题</th>
+		      <th>内容</th>
+		      <th>排序</th>  
+		      <th>详情</th>
+		      <th>修改</th>
+		      <th>删除</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	<?php if(count($res3)>0){?>
+		<?php foreach ($res3 as $res){?>
+		<tr>
+		<td><?php echo mb_substr($res->getTitle(), 0,18,'utf-8');?>......</td>
+		<td><?php echo $res->getContent();?></td>
+		<td><?php echo $res->getSort();?></td>
+		<td><a href="/travel/addiview?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">详情</a></td>
+		<td><a href="/travel/addiupdate?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">修改</a></td>
+		<td><a href="#myModal<?php echo $res->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		</tr>
+<!-- Modal -->
+<div id="myModal<?php echo $res->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除标题为（<?php echo $res->getTitle();?>）的行程附加信息</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除标题为（<?php echo $res->getTitle();?>）的行程附加信息吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $res->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $res->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/travel/addidel",
+				data:"id=<?php echo $res->getId();?>",
+				success:
+					location.reload(),
+			});
+		});
+});
+
+</script>		
+		<?php }?>
+	<?php }else{?>
+			<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+	<?php }?>
+		 </tbody>
+		</table>
+		    </div>
+		    <div class="tab-pane" id="tab4">
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>标题</th>
+		      <th>内容</th>
+		      <th>排序</th>  
+		      <th>详情</th>
+		      <th>修改</th>
+		      <th>删除</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	<?php if(count($res4)>0){?>
+		<?php foreach ($res4 as $res){?>
+		<tr>
+		<td><?php echo mb_substr($res->getTitle(), 0,18,'utf-8');?>......</td>
+		<td><?php echo $res->getContent();?></td>
+		<td><?php echo $res->getSort();?></td>
+		<td><a href="/travel/addiview?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">详情</a></td>
+		<td><a href="/travel/addiupdate?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">修改</a></td>
+		<td><a href="#myModal<?php echo $res->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		</tr>
+<!-- Modal -->
+<div id="myModal<?php echo $res->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除标题为（<?php echo $res->getTitle();?>）的行程附加信息</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除标题为（<?php echo $res->getTitle();?>）的行程附加信息吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $res->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $res->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/travel/addidel",
+				data:"id=<?php echo $res->getId();?>",
+				success:
+					location.reload(),
+			});
+		});
+});
+
+</script>		
+		<?php }?>
+	<?php }else{?>
+			<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+	<?php }?>
+		 </tbody>
+		</table>
+		    
+		    </div>
+		    <div class="tab-pane" id="tab5">
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>标题</th>
+		      <th>内容</th>
+		      <th>排序</th>  
+		      <th>详情</th>
+		      <th>修改</th>
+		      <th>删除</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	<?php if(count($res5)>0){?>
+		<?php foreach ($res5 as $res){?>
+		<tr>
+		<td><?php echo mb_substr($res->getTitle(), 0,18,'utf-8');?>......</td>
+		<td><?php echo $res->getContent();?></td>
+		<td><?php echo $res->getSort();?></td>
+		<td><a href="/travel/addiview?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">详情</a></td>
+		<td><a href="/travel/addiupdate?id=<?php echo $res->getId();?>&hmsg=<?php echo $hmsg;?>">修改</a></td>
+		<td><a href="#myModal<?php echo $res->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		</tr>
+<!-- Modal -->
+<div id="myModal<?php echo $res->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除标题为（<?php echo $res->getTitle();?>）的行程附加信息</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除标题为（<?php echo $res->getTitle();?>）的行程附加信息吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $res->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $res->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/travel/addidel",
+				data:"id=<?php echo $res->getId();?>",
+				success:
+					location.reload(),
+			});
+		});
+});
+
+</script>		
+		<?php }?>
+	<?php }else{?>
+			<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+	<?php }?>
+		 </tbody>
+		</table>
+		    </div>
+		  </div>
+		</div>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

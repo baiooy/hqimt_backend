@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>虹桥医游网管理后台</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- Demo page code -->
+
+    <style type="text/css">
+        #line-chart {
+            height:300px;
+            width:800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+        .brand { font-family: georgia, serif; }
+        .brand .first {
+            color: #ccc;
+            font-style: italic;
+        }
+        .brand .second {
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+  <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+  <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+  <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> 
+  <body class=""> 
+  <!--<![endif]-->
+    
+    <div class="navbar">
+        <div class="navbar-inner">
+                <ul class="nav pull-right">
+                    <li><a tabindex="-1" href="/admin/logout">退出</a></li>
+
+                    
+                </ul>
+                <a class="brand" href="/index/index"><span class="first">虹桥</span> <span class="second">医游网(<?php echo Zend_Registry::get('version');?>)</span></a>
+        </div>
+    </div>
+    
+
+
+    
+    <div class="sidebar-nav">
+        <a href="#statistics-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-dashboard"></i>统计管理<i class="icon-chevron-up"></i></a>
+        <ul id="statistics-menu" class="nav nav-list collapse">
+            <li><a href="/statistics/nuser">用户统计</a></li>
+      		<li><a href="/statistics/doctor">医生统计</a></li>
+      		<li><a href="/statistics/hospital">医院统计</a></li>
+        </ul>
+
+        <a href="#nuser-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
+        <ul id="nuser-menu" class="nav nav-list collapse">
+        	<li ><a href="/nuser/detail">查看用户</a></li>
+            <li ><a href="/nuser/search">查找用户</a></li>
+            <li ><a href="/nuser/add">新增用户</a></li>
+        </ul>
+        
+        <a href="#doctor-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>医生管理<i class="icon-chevron-up"></i></a>
+        <ul id="doctor-menu" class="nav nav-list collapse">
+        	<li ><a href="/doctor/detail">查看医生</a></li>
+        	<li ><a href="/doctor/search">查找医生</a></li>
+            <li ><a href="/doctor/audit">注册医生审核</a></li>
+            <li ><a href="/doctor/add">新增医生</a></li>
+        </ul>
+        
+        <a href="#hospital-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>医院管理<i class="icon-chevron-up"></i></a>
+        <ul id="hospital-menu" class="nav nav-list collapse">
+        	<li ><a href="/hospital/detail">查看医院</a></li>
+        	<li ><a href="/hospital/search">查找医院</a></li>
+            <li ><a href="/hospital/audit">注册医院审核</a></li>
+            <li ><a href="/hospital/add">新增医院</a></li>
+        </ul>
+
+        <a href="#banner-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-fire"></i>广告管理<i class="icon-chevron-up"></i></a>
+        <ul id="banner-menu" class="nav nav-list collapse">
+            <li ><a href="/banner/detail">查看广告</a></li>
+            <li ><a href="/banner/add">新增广告</a></li>
+        </ul>
+        
+        <a href="#recuperate-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-eye-open"></i>体检与疗养<i class="icon-chevron-up"></i></a>
+        <ul id="recuperate-menu" class="nav nav-list collapse">
+            <li ><a href="/travel/detail?type=1">查看体检与疗养行程</a></li>
+            <li ><a href="/travel/add?type=1">新增体检与疗养行程</a></li>
+            <li ><a href="/travel/import?type=1">导入体检与疗养行程</a></li>
+            <li ><a href="/travel/order?type=1">体检与疗养行程订单</a></li>
+        </ul>
+        
+        <a href="#treat-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-eye-open"></i>看病<i class="icon-chevron-up"></i></a>
+        <ul id="treat-menu" class="nav nav-list collapse">
+            <li ><a href="/travel/detail?type=2">查看看病行程</a></li>
+            <li ><a href="/travel/add?type=2">新增看病行程</a></li>
+            <li ><a href="/travel/import?type=2">导入看病行程</a></li>
+            <li ><a href="/travel/order?type=2">看病行程订单</a></li>
+        </ul>
+        
+        <a href="#cosme-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-eye-open"></i>美容与抗衰老<i class="icon-chevron-up"></i></a>
+        <ul id="cosme-menu" class="nav nav-list collapse">
+            <li ><a href="/travel/detail?type=3">查看美容与抗衰老行程</a></li>
+            <li ><a href="/travel/add?type=3">新增美容与抗衰老行程</a></li>
+            <li ><a href="/travel/import?type=3">导入美容与抗衰老行程</a></li>
+            <li ><a href="/travel/order?type=3">美容与抗衰老行程订单</a></li>
+        </ul>
+        
+        <a href="#destination-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-thumbs-up"></i>医游目的地<i class="icon-chevron-up"></i></a>
+        <ul id="destination-menu" class="nav nav-list collapse">
+            <li ><a href="/destination/detail">查看医游目的地</a></li>
+            <li ><a href="/destination/add">新增医游目的地</a></li>
+            <li ><a href="/destination/import">导入医游目的地</a></li>
+        </ul>        
+        
+        <a href="#costperf-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-fire"></i>热门项目<i class="icon-chevron-up"></i></a>
+        <ul id="costperf-menu" class="nav nav-list collapse">
+            <li ><a href="/costperf/detail">查看热门项目</a></li>
+            <li ><a href="/costperf/add">新增热门项目</a></li>
+            <li ><a href="/costperf/catedetail">热门项目分类</a></li>
+        </ul> 
+         
+        <a href="#consult-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user-md"></i>咨询医生<i class="icon-chevron-up"></i></a>
+        <ul id="consult-menu" class="nav nav-list collapse">
+            <li ><a href="/consult/order">查看咨询医生订单</a></li>
+        </ul> 
+         
+         
+        <a href="#diagnosis-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-github"></i>全球会诊<i class="icon-chevron-up"></i></a>
+        <ul id="diagnosis-menu" class="nav nav-list collapse">
+            <li ><a href="/diagnosis/introdetail">全球会诊介绍</a></li>
+            <li ><a href="/diagnosis/pricedetail">全球会诊价格</a></li>
+            <li ><a href="/diagnosis/departdetail">会诊申请手术项目</a></li>
+			<li ><a href="/diagnosis/departcatedetail">会诊申请手术分类</a></li>
+            <li ><a href="/diagnosis/applydetail">查看全球会诊申请</a></li>           
+        </ul>  
+        
+        <a href="#card-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-credit-card"></i>积分卡管理<i class="icon-chevron-up"></i></a>
+        <ul id="card-menu" class="nav nav-list collapse">
+            <li ><a href="/card/detail">查看积分卡</a></li>
+            <li ><a href="/card/add">新增积分卡</a></li>
+            <li ><a href="/card/order">积分卡订单</a></li>
+        </ul>
+        <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-list-ul"></i>订单管理<i class="icon-chevron-up"></i></a>
+        <ul id="order-menu" class="nav nav-list collapse">
+            <li ><a href="/travel/order?type=1">体检与疗养行程订单</a></li>
+            <li ><a href="/travel/order?type=2">看病行程订单</a></li>
+            <li ><a href="/travel/order?type=3">美容与抗衰老行程订单</a></li>
+            <li ><a href="/consult/order">咨询医生订单</a></li>
+            <li ><a href="/card/order">积分卡订单</a></li>
+            
+        </ul>
+        <a href="#help-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-question-sign"></i>帮助/法律/关于/电话<i class="icon-chevron-up"></i></a>
+        <ul id="help-menu" class="nav nav-list collapse">
+            <li ><a href="/article/detail?type=1">查看帮助文本</a></li>
+            <li ><a href="/article/add?type=1">新增帮助文本</a></li>
+            <li class="divider"></li>
+            <li ><a href="/article/detail?type=2">查看法律文本</a></li>
+            <li ><a href="/article/add?type=2">新增法律文本</a></li>
+            <li class="divider"></li>
+            <li ><a href="/article/detail?type=3">查看关于我们文本</a></li>
+            <li ><a href="/article/add?type=3">新增关于我们文本</a></li>   
+            <li class="divider"></li>
+            <li ><a href="/article/detail?type=4">查看虹桥中心电话</a></li> 
+            <li ><a href="/article/add?type=4">新增虹桥中心电话</a></li>          
+        </ul>    
+ 
+        <a href="#package-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-briefcase"></i>软件包管理<i class="icon-chevron-up"></i></a>
+        <ul id="package-menu" class="nav nav-list collapse">
+            <li ><a href="/package/detail">查看软件包</a></li>
+            <li ><a href="/package/add">新增软件包</a></li>
+        </ul>   
+
+        <a href="/feedback/detail" class="nav-header" ><i class="icon-tasks"></i>用户反馈</a>    
+    </div>
+    
+
+    
+    <div class="content">
+		<!-- content -->
+		<?php echo $this->layout()->content; ?>
+    </div>
+    
+
+
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript">
+    </script>
+    
+  </body>
+</html>

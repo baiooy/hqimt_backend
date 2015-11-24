@@ -1,0 +1,138 @@
+<?php $travel = $this->travel;?>
+<div class="header">
+	<h1 class="page-title">修改行程信息</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/travel/detail?type=<?php echo $travel->getType();?>"><?php echo Yy_Utils::getTravelType($travel->getType());?>行程列表</a> <span class="divider">/</span></li>
+	<li class="active">修改行程信息</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+
+<br />
+<form class="form-horizontal" action="/travel/asyncajax" method="post" enctype="multipart/form-data">
+
+ <input type="hidden" id="inputId" placeholder="<?php echo $travel->getId();?>" class="span8" name="id" value="<?php echo $travel->getId();?>">
+
+  <div class="control-group">
+    <label class="control-label" for="inputLocation_type">位置</label>
+    <div class="controls">
+     <select id="inputLocation_type" name="location_type" class="span8">
+     <?php $location_type = $travel->getLocation_type();
+     if($location_type == 1){
+     ?>
+	  <option value ="1" selected="selected">国内</option>
+	  <option value ="2">国外</option>
+	  <?php }else{?>
+	  <option value ="1">国内</option>
+	  <option value ="2" selected="selected">国外</option>
+	  <?php }?>
+	</select>
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputAdult_oprice">成人原价</label>
+    <div class="controls">
+      <input type="text" id="inputAdult_oprice" placeholder="<?php echo $travel->getAdult_oprice();?>" class="span8" name="adult_oprice">
+    </div>
+  	</div>
+  	
+  	<div class="control-group">
+    <label class="control-label" for="inputAdult_dprice">成人现价</label>
+    <div class="controls">
+      <input type="text" id="inputAdult_dprice" placeholder="<?php echo $travel->getAdult_dprice();?>" class="span8" name="adult_dprice">
+    </div>
+  	</div>
+  	
+  	<div class="control-group">
+    <label class="control-label" for="inputChild_oprice">儿童原价</label>
+    <div class="controls">
+      <input type="text" id="inputChild_oprice" placeholder="<?php echo $travel->getChild_oprice();?>" class="span8" name="child_oprice">
+    </div>
+  	</div>
+  	
+  	<div class="control-group">
+    <label class="control-label" for="inputChild_dprice">儿童现价</label>
+    <div class="controls">
+      <input type="text" id="inputChild_dprice" placeholder="<?php echo $travel->getChild_dprice();?>" class="span8" name="child_dprice">
+    </div>
+  	</div>
+  	
+  	
+  <div class="control-group">
+    <label class="control-label" for="inputArea">区域</label>
+    <div class="controls">
+      <input type="text" id="inputArea" placeholder="<?php echo $travel->getArea();?>" class="span8" name="area">
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <label class="control-label" for="inputSales">已卖票数</label>
+    <div class="controls">
+      <input type="text" id="inputSales" placeholder="<?php echo $travel->getSales();?>" class="span8" name="sales">
+    </div>
+  </div>
+    <div class="control-group">
+    <label class="control-label" for="inputTitle">大标题</label>
+    <div class="controls">
+      <input type="text" id="inputTitle" placeholder="<?php echo $travel->getTitle();?>" class="span8" name="title">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputSubtitle">小标题</label>
+    <div class="controls">
+      <input type="text" id="inputSubtitle" placeholder="<?php echo $travel->getSubtitle();?>" class="span8" name="subtitle">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputFile">图片</label>
+    <div class="controls">
+      <input type="file" id="inputFile" class="span8" name="img">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputStatus">状态</label>
+    <div class="controls">
+     <select id="inputStatus" name="status" class="span8">
+     <?php $status = $travel->getStatus();
+     if($status == 1){
+     ?>
+	  <option value ="1" selected="selected">正常</option>
+	  <option value ="0">禁用</option>
+	  <?php }else{?>
+	  <option value ="1">正常</option>
+	  <option value ="0" selected="selected">禁用</option>
+	  <?php }?>
+	</select>
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">保存</button>
+      <button type="reset" class="btn">重置</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+		<footer>
+			<hr>
+			<p class="pull-right">虹桥医游网移动互联网项目</p>
+			<p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com"
+					target="_blank">虹桥医游网</a>
+			</p>
+		</footer>
+
+	</div>
+</div>

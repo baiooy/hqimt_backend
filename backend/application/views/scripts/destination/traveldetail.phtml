@@ -1,0 +1,104 @@
+<?php $travels = $this->travels;$did = $this->did;?>
+<?php $hmsg = @$_GET['hmsg']?:"";?>
+<div class="header"> 
+	<h1 class="page-title">查看医游目的地<?php if($hmsg){echo "<span style='color:red;'>".$hmsg."</span>";}?>推荐行程</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/destination/detail">医游目的地列表</a> <span class="divider">/</span></li>
+	<li><a href="/destination/view?id=<?php echo $this->did;?>">医游目的地详情</a> <span class="divider">/</span></li>
+	<li class="active">医游目的地推荐行程列表</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+				<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>类型</th>
+		      <th>标题</th>
+		      <th>位置</th>
+		      <th>成人原价</th> 
+		      <th>成人现价</th>
+		      <th>儿童原价</th>
+		      <th>儿童现价</th>
+		      <th>地区</th>   
+		      <th>已卖票数</th>  
+		      <th>行程详情</th>
+		      <th>取消推荐</th> 
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <?php if(count($travels)>0){?>
+		    
+		    <?php foreach ($travels as $travel){?>
+		    <tr>
+		      <td><?php echo Yy_Utils::getTravelType($travel->getType());?></td>
+		      <td><?php echo mb_substr($travel->getTitle(), 0,18,'utf-8');?>......</td>
+		      <td><?php echo Yy_Utils::getTravelLType($travel->getLocation_type());?></td>
+		      <td><?php echo $travel->getAdult_oprice();?></td>
+		      <td><?php echo $travel->getAdult_dprice();?></td>
+		      <td><?php echo $travel->getChild_oprice();?></td>
+		      <td><?php echo $travel->getChild_dprice();?></td>
+		      <td><?php echo $travel->getArea();?></td>
+		      <td><?php echo $travel->getSales();?></td>
+		      <td><a target="_blank" href="/travel/view?id=<?php echo $travel->getId();?>">详情</a></td>
+			  <td><a href="#myModal<?php echo $travel->getId();?>" role="button"  data-toggle="modal" >取消推荐</a></td>
+		       </tr>
+<!-- Modal -->
+<div id="myModal<?php echo $travel->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">取消到<?php echo $travel->getArea();?>的行程推荐</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定取消到<?php echo $travel->getArea();?>的行程推荐吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $travel->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $travel->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/destination/travelcancel",
+				data:"did=<?php echo $did;?>&tid=<?php echo $travel->getId();?>",
+				success:
+					location.reload(),
+					
+			});
+		});
+});
+
+</script>
+		      <?php }?>		   
+		    <?php }else{?>
+		   	<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+		    <?php }?>
+		  </tbody>
+		</table>
+		
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

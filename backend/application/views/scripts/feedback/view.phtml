@@ -1,0 +1,50 @@
+<?php $feedback = $this->feedback;?>
+<div class="header"> 
+	<h1 class="page-title">用户反馈详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/feedback/detail">用户反馈列表</a> <span class="divider">/</span></li>
+	<li class="active">用户反馈详情</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($feedback){?>
+		<table class="table table-bordered table-hover">
+<!-- 
+		<tr>
+		<td style="width: 10%">编号</td>
+		<td><?php echo $feedback->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<td >联系方式</td>
+		<td><?php echo $feedback->getContact();?></td>
+		</tr>
+		<tr>
+		<td>反馈内容</td>
+		<td><?php echo $feedback->getContent();?></td>
+		</tr>
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $feedback->getCtime();?></td>
+		</tr>
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $feedback->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($feedback->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

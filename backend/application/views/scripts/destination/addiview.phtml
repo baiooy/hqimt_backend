@@ -1,0 +1,79 @@
+<?php 
+$addi = $this->addi;
+$hmsg = @$_GET['hmsg']?:"";
+$id = $addi->getId();
+$did = $addi->getDestination_id();
+?>
+<div class="header"> 
+	<h1 class="page-title">医游目的地<?php if($hmsg){echo "<span style='color:red;'>".$hmsg."</span>";}?>附加信息详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/destination/detail">医游目的地列表</a> <span class="divider">/</span></li>
+	<li><a href="/destination/view?id=<?php echo $did;?>">医游目的地详情</a> <span class="divider">/</span></li>
+	<li><a href="/destination/addidetail?id=<?php echo $did;?>&hmsg=<?php echo $hmsg;?>">医游目的地附加信息列表</a> <span class="divider">/</span></li>
+	<li class="active">医游目的地附加信息详情</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($addi){?>
+		<table class="table table-bordered table-hover">
+<!--  	
+		<tr>
+		<td>编号</td>
+		<td><?php echo $addi->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<!-- destinationID -->
+		<td style="width:10%">标题</td>
+		<td><?php echo $addi->getTitle();?></td>
+		</tr>
+		<tr>
+		<td>内容</td>
+		<td><?php echo $addi->getContent();?></td>
+		</tr>
+		<tr>
+		<td>图片</td>
+		<td><img src="/destination/addiimage?id=<?php echo $addi->getId();?>" height="120" width="120" /></td>
+		</tr>
+		<tr>
+		<td>排序</td>
+		<td><?php echo $addi->getSort();?></td>
+		</tr>
+		<tr>
+		<td>类型</td>
+		<td><?php echo Yy_Utils::getDestinationAddType($addi->getType());?></td>
+		</tr>	
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $addi->getCtime();?></td>
+		</tr>	
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $addi->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($addi->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+<div style="width:20%">		
+		<a href="/destination/addiupdate?id=<?php echo $addi->getId();?>&hmsg=<?php echo $hmsg;?>" class="btn btn-block">是否修改？</a>
+		<?php 
+		if(@is_numeric($_GET['did'])){?>
+		<br /><br />
+		<a href="/destination/addiadd?id=<?php echo $_GET['did'];?>&hmsg=<?php echo $hmsg;?>" class="btn btn-block">继续增加？</a>
+		
+		<?php }?>
+</div>		
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

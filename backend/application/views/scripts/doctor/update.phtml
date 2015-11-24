@@ -1,0 +1,209 @@
+<?php $doctor = $this->doctor;?>
+<div class="header">
+	<h1 class="page-title">修改医生信息</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/doctor/detail">医生列表</a> <span class="divider">/</span></li>
+	<li class="active">修改医生信息</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+
+<br />
+<form class="form-horizontal" action="/doctor/updateajax" method="post" enctype="multipart/form-data">
+
+ <input type="hidden" id="inputId" placeholder="<?php echo $doctor->getId();?>" class="span8" name="id" value="<?php echo $doctor->getId();?>">
+
+  
+  <div class="control-group">
+    <label class="control-label" for="inputName">姓名</label>
+    <div class="controls">
+      <input type="text" id="inputName" placeholder="<?php echo $doctor->getName();?>" class="span8" name="name">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputFile">头像</label>
+    <div class="controls">
+      <input type="file" id="inputFile" class="span8" name="avatar">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputSex">性别</label>
+    <div class="controls">
+     <select id="inputSex" name="sex" class="span8">
+     <?php $sex = $doctor->getSex();
+     if($sex == 1){
+	 ?>	
+	  <option value ="1" selected="selected">男</option>
+	  <option value ="2">女</option>
+	  <option value ="3">未设置</option>
+     <?php }elseif($sex==2){?>
+	  <option value ="1">男</option>
+	  <option value ="2" selected="selected">女</option>
+	  <option value ="3">未设置</option>
+	<?php }else{?>
+	 <option value ="1">男</option>
+	  <option value ="2">女</option>
+	  <option value ="3" selected="selected">未设置</option>
+	<?php }?>
+	</select>
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputBirthday">生日</label>
+    <div class="controls">
+      <input type="text" id="inputBirthday" placeholder="<?php echo $doctor->getBirthday();?>" class="span8" name="birthday">
+    </div>
+  	</div>
+  	
+  	
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">邮箱</label>
+    <div class="controls">
+      <input type="text" id="inputEmail" placeholder="<?php echo $doctor->getEmail();?>" class="span8" name="email">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputPasswd">密码</label>
+    <div class="controls">
+      <input type="password" id="inputPasswd" placeholder="输入该值进行改密码操作" class="span8" name="passwd" >
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <label class="control-label" for="inputDepartment">科室</label>
+    <div class="controls">
+      <input type="text" id="inputDepartment" placeholder="<?php echo $doctor->getDepartment();?>" class="span8" name="department">
+    </div>
+  </div>
+    <div class="control-group">
+    <label class="control-label" for="inputPoint">积分</label>
+    <div class="controls">
+      <input type="text" id="inputPoint" placeholder="<?php echo $doctor->getPoint();?>" class="span8" name="point">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputCity">城市</label>
+    <div class="controls">
+      <input type="text" id="inputCity" placeholder="<?php echo $doctor->getCity();?>" class="span8" name="city">
+    </div>
+  </div>
+  <?php $cert = $doctor->getCertified();?>
+    <div class="control-group">
+    <label class="control-label" for="inputCertified">认证级别</label>
+    <div class="controls">
+     <select id="inputCertified" name="certified" class="span8">
+	  <option value ="1" <?php if($cert == 1){echo "selected='selected'";}?>>★</option>
+	  <option value ="2" <?php if($cert == 2){echo "selected='selected'";}?>>★★</option>
+	  <option value ="3" <?php if($cert == 3){echo "selected='selected'";}?>>★★★</option>
+	  <option value ="4" <?php if($cert == 4){echo "selected='selected'";}?>>★★★★</option>
+	  <option value ="5" <?php if($cert == 5){echo "selected='selected'";}?>>★★★★★</option>
+	</select>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputSpecial">擅长</label>
+    <div class="controls">
+      <input type="text" id="inputSpecial" placeholder="<?php echo $doctor->getSpecial();?>" class="span8" name="special">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputCountry">国家</label>
+    <div class="controls">
+      <input type="text" id="inputCountry" placeholder="<?php echo $doctor->getCountry();?>" class="span8" name="country">
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <label class="control-label" for="inputIntroduction">简介</label>
+    <div class="controls">
+      <input type="text" id="inputIntroduction" placeholder="<?php echo $doctor->getIntroduction();?>" class="span8" name="introduction">
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <label class="control-label" for="inputHospital">所属医院</label>
+    <div class="controls">
+      <input type="text" id="inputHospital" placeholder="<?php echo $doctor->getHospital();?>" class="span8" name="hospital">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputArea">区域</label>
+    <div class="controls">
+      <input type="text" id="inputArea" placeholder="<?php echo $doctor->getArea();?>" class="span8" name="area">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputQualification">资质</label>
+    <div class="controls">
+      <input type="text" id="inputQualification" placeholder="<?php echo $doctor->getQualification();?>" class="span8" name="qualification">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputReservation_fee">预约费用</label>
+    <div class="controls">
+      <input type="text" id="inputReservation_fee" placeholder="<?php echo $doctor->getReservation_fee();?>" class="span8" name="reservation_fee">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputReservation_number">预约人数</label>
+    <div class="controls">
+      <input type="text" id="inputReservation_number" placeholder="<?php echo $doctor->getReservation_number();?>" class="span8" name="reservation_number">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputStatus">状态</label>
+    <div class="controls">
+     <select id="inputStatus" name="status" class="span8">
+     <?php $status = $doctor->getStatus();
+     if($status == 1){
+     ?>
+	  <option value ="1" selected="selected">正常</option>
+	  <option value ="0">禁用</option>
+	  <?php }else{?>
+	  <option value ="1">正常</option>
+	  <option value ="0" selected="selected">禁用</option>
+	  <?php }?>
+	</select>
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">保存</button>
+      <button type="reset" class="btn">重置</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+		<footer>
+			<hr>
+			<p class="pull-right">虹桥医游网移动互联网项目</p>
+			<p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com"
+					target="_blank">虹桥医游网</a>
+			</p>
+		</footer>
+
+	</div>
+</div>

@@ -1,0 +1,102 @@
+<?php $hospital = $this->hospital;?>
+<div class="header"> 
+	<h1 class="page-title">医院详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/hospital/detail">医院列表</a> <span class="divider">/</span></li>
+	<li class="active">医院详情</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($hospital){?>
+		<table class="table table-bordered table-hover">
+<!--
+		<tr>
+		<td>编号</td>
+		<td><?php echo $hospital->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<td style="width:10%">姓名</td>
+		<td><?php echo $hospital->getName();?></td>
+		</tr>
+		<tr>
+		<td>头像</td>
+		<td><img src="/hospital/image?id=<?php echo $hospital->getId();?>" height="120" width="120" /></td>
+		</tr>
+		<tr>
+		<td>邮箱</td>
+		<td><?php echo $hospital->getEmail();?></td>
+		</tr>
+		<tr>
+		<td>特色科室</td>
+		<td><?php echo $hospital->getDepartments();?></td>
+		</tr>
+		<tr>
+		<td>医院类型</td>
+		<td><?php echo $hospital->getType();?></td>
+		</tr>
+		<tr>
+		<td>认证级别</td>
+		<td><?php echo Yy_Utils::getCertifiedStar($hospital->getCertified());?></td>
+		</tr>		
+		<tr>
+		<td>城市</td>
+		<td><?php echo $hospital->getCity();?></td>
+		</tr>
+		<tr>
+		<td>标签</td>
+		<td><?php echo $hospital->getLabel();?></td>
+		</tr>
+
+		<tr>
+		<td>国家</td>
+		<td><?php echo $hospital->getCountry();?></td>
+		</tr>
+		<tr>
+		<td>积分</td>
+		<td><?php echo $hospital->getPoint();?></td>
+		</tr>
+		<tr>
+		<td>区域</td>
+		<td><?php echo $hospital->getArea();?></td>
+		</tr>
+		<tr>
+		<td>简介</td>
+		<td><?php echo $hospital->getIntroduction();?></td>
+		</tr>
+		<tr>
+		<td>经度</td>
+		<td><?php echo $hospital->getLongitude();?></td>
+		</tr>
+		<tr>
+		<td>纬度</td>
+		<td><?php echo $hospital->getLatitude();?></td>
+		</tr>
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $hospital->getCtime();?></td>
+		</tr>
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $hospital->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($hospital->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+		<div style="width:20%">
+		<a href="/hospital/update?id=<?php echo $hospital->getId();?>" class="btn btn-block">是否修改？</a>
+		</div>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="header"> 
+	<h1 class="page-title">查找医院</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active">查找医院</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+			<label>根据邮箱查找</label>
+			<form class="form-search">
+			  <input type="text" class="input-medium search-query" name="email">
+			  <button type="submit" class="btn">搜索</button>
+			</form>
+			
+			<label>根据医院名称查找</label>
+			<form class="form-search">
+			  <input type="text" class="input-medium search-query" name="name">
+			  <button type="submit" class="btn">搜索</button>
+			</form>
+<?php if(count($this->hospitals)>0){?>
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>名称</th>
+		      <th>邮箱</th>
+		      <th>特色科室</th>
+		      <th>医院类型</th>
+		      <th>认证级别</th>
+		      <th>地区</th>
+		      <th>国家</th>
+		      <th>积分</th>
+		      <th>详情</th>   
+		      <th>修改</th>
+		      <th>删除</th>  
+		    </tr>
+		  </thead>
+		  <tbody>
+		  		  <?php foreach ($this->hospitals as $record){?>
+		  <tr>
+			  <td><?php echo $record->getName();?></td>
+			  <td><?php echo $record->getEmail();?></td>
+			  <td><?php echo $record->getDepartments();?></td>
+			  <td><?php echo $record->getType();?></td>
+			  <td><?php echo Yy_Utils::getCertifiedStar($record->getCertified());?></td>
+			  <td><?php echo $record->getCity();?></td>
+			  <td><?php echo $record->getCountry();?></td>
+			  <td><?php echo $record->getPoint();?></td>
+			  <td><a href="/hospital/view?id=<?php echo $record->getId();?>">详情</a></td>
+			  <td><a href="/hospital/update?id=<?php echo $record->getId();?>">修改</a></td>
+			  <td><a href="#myModal<?php echo $record->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		  </tr>
+<!-- Modal -->
+<div id="myModal<?php echo $record->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除账号为（<?php echo $record->getEmail();?>）的医院</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除账号为（<?php echo $record->getEmail(); ?>）的医院吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $record->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $record->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/hospital/delete",
+				data:"id=<?php echo $record->getId();?>",
+				success:
+					location.reload(),
+			});
+		});
+});
+
+</script>		  
+		  <?php }?>
+		  </tbody>
+		  </table>
+		  <?php }?>
+
+
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>	

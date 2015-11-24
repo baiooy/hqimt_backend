@@ -1,0 +1,63 @@
+<div class="header"> 
+	<h1 class="page-title">新增全球会诊介绍</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/diagnosis/introdetail">全球会诊介绍列表</a> <span class="divider">/</span></li>
+	<li class="active">新增全球会诊介绍</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<br />
+		<form class="form-horizontal" action="/diagnosis/introasyncajax" method="post" enctype="multipart/form-data">
+		  <div class="control-group">
+		    <label class="control-label" for="inputTitle">标题</label>
+		    <div class="controls">
+		      <input type="text" id="inputTitle" placeholder="请输入会诊介绍标题" class="span8" name="title">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputContent">内容</label>
+		    <div class="controls">
+		      <textarea id="textareaContent" class="textbox span8" placeholder="请输入会诊介绍内容" name="content"></textarea>
+		    </div>
+		  </div>
+		   <div class="control-group">
+		    <label class="control-label" for="inputFile">图片</label>
+		    <div class="controls">
+		      <input type="file" id="inputFile" class="span8" name="img">
+		    </div>
+		   </div>
+		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputSort">排序</label>
+		    <div class="controls">
+		      <input type="text" id="inputSort" placeholder="请输入会诊介绍排序顺序，数值越小越靠前" class="span8" name="sort">
+		    </div>
+		  </div>
+		  
+		    <div class="control-group">
+		    <label class="control-label" for="inputStatus">状态</label>
+		    <div class="controls">
+		     <select id="inputStatus" name="status" class="span8">
+			  <option value ="1" selected="selected">正常</option>
+			  <option value ="0">禁用</option>
+			</select>
+		    </div>
+		  </div>
+		    <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">保存</button>
+		      <button type="reset" class="btn">重置</button>
+		    </div>
+		  </div>
+		</form>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

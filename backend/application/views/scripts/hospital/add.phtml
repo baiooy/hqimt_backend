@@ -1,0 +1,131 @@
+<div class="header"> 
+	<h1 class="page-title">新增医院</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active">新增医院</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<br />
+		<form class="form-horizontal" action="/hospital/asyncajax" method="post" enctype="multipart/form-data">
+		  <div class="control-group">
+		    <label class="control-label" for="inputName">医院名称</label>
+		    <div class="controls">
+		      <input type="text" id="inputName" placeholder="请输入医院名称" class="span8" name="name">
+		    </div>
+		  </div>
+
+		   <div class="control-group">
+		    <label class="control-label" for="inputFile">头像</label>
+		    <div class="controls">
+		      <input type="file" id="inputFile" class="span8" name="img">
+		    </div>
+		   </div>
+		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputEmail">邮箱</label>
+		    <div class="controls">
+		      <input type="text" id="inputEmail" placeholder="请输入邮箱" class="span8" name="email">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputPasswd">密码</label>
+		    <div class="controls">
+		      <input type="text" id="inputPasswd" placeholder="请输入密码" class="span8" name="passwd">
+		    </div>
+		  </div>		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputDepartments">特色科室</label>
+		    <div class="controls">
+		      <input type="text" id="inputDepartments" placeholder="请输入特色科室" class="span8" name="departments">
+		    </div>
+		  </div>	
+
+		  <div class="control-group">
+		    <label class="control-label" for="inputType">医院类型</label>
+		    <div class="controls">
+		      <input type="text" id="inputType" placeholder="请输入医院类型" class="span8" name="type">
+		    </div>
+		  </div>	
+		  	  
+   <div class="control-group">
+    <label class="control-label" for="inputCertified">认证级别</label>
+    <div class="controls">
+     <select id="inputCertified" name="certified" class="span8">
+	  <option value ="1" >★</option>
+	  <option value ="2" >★★</option>
+	  <option value ="3" >★★★</option>
+	  <option value ="4" >★★★★</option>
+	  <option value ="5" >★★★★★</option>
+	</select>
+    </div>
+   </div>
+
+		  <div class="control-group">
+		    <label class="control-label" for="inputCity">地区</label>
+		    <div class="controls">
+		      <input type="text" id="inputCity" placeholder="请输入区域" class="span8" name="city">
+		    </div>
+		  </div>		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputLabel">标签</label>
+		    <div class="controls">
+		      <input type="text" id="inputLabel" placeholder="请输入标签" class="span8" name="label">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputCountry">国家</label>
+		    <div class="controls">
+		      <input type="text" id="inputCountry" placeholder="请输入国家" class="span8" name="country">
+		    </div>
+		  </div>	
+		  <div class="control-group">
+		    <label class="control-label" for="inputArea">所属洲</label>
+		    <div class="controls">
+		      <input type="text" id="inputArea" placeholder="请输入所属洲" class="span8" name="area">
+		    </div>
+		  </div>
+    <div class="control-group">
+    <label class="control-label" for="textareaIntroduction">简介</label>
+    <div class="controls">
+      <textarea id="textareaIntroduction" class="textbox span8" placeholder="请输入简介" name="introduction"></textarea>
+    </div>
+  	</div>		
+		  <div class="control-group">
+		    <label class="control-label" for="inputLongitude">经度</label>
+		    <div class="controls">
+		      <input type="text" id="inputLongitude" placeholder="请输入经度" class="span8" name="longitude">
+		    </div>
+		  </div>  
+		  <div class="control-group">
+		    <label class="control-label" for="inputLatitude">纬度</label>
+		    <div class="controls">
+		      <input type="text" id="inputLatitude" placeholder="请输入纬度" class="span8" name="latitude">
+		    </div>
+		  </div> 		  	  		  	  		  
+		    <div class="control-group">
+		    <label class="control-label" for="inputStatus">状态</label>
+		    <div class="controls">
+		     <select id="inputStatus" name="status" class="span8">
+			  <option value ="1" selected="selected">正常</option>
+			  <option value ="0">禁用</option>
+			</select>
+		    </div>
+		  </div>
+		    <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">保存</button>
+		      <button type="reset" class="btn">重置</button>
+		    </div>
+		  </div>
+		</form>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

@@ -1,0 +1,95 @@
+<?php $hospitals = $this->hospitals;$did = $this->did;?>
+<?php $hmsg = @$_GET['hmsg']?:"";?>
+<div class="header"> 
+	<h1 class="page-title">查看热门项目<?php if($hmsg){echo "<span style='color:red;'>".$hmsg."</span>";}?>推荐医院</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/costperf/detail">热门项目列表</a> <span class="divider">/</span></li>
+	<li><a href="/costperf/view?id=<?php echo $this->did;?>">热门项目详情</a> <span class="divider">/</span></li>
+	<li class="active">热门项目推荐医院列表</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+				<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>医院名称</th>
+		      <th>特色科室</th> 
+		      <th>医院类型</th>   
+		      <th>认证级别</th>
+		      <th>城市</th>
+		      <th>国家</th>
+		      <th>医院详情</th> 
+		      <th>取消推荐</th> 
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <?php if(count($hospitals)>0){?>
+		    
+		    <?php foreach ($hospitals as $hospital){?>
+		    <tr>
+		      <td><?php echo $hospital->getName();?></td>
+		      <td><?php echo $hospital->getDepartments();?></td>
+		      <td><?php echo $hospital->getType();?></td>
+		      <td><?php echo Yy_Utils::getCertifiedStar($hospital->getCertified());?></td>
+		      <td><?php echo $hospital->getCity();?></td>
+		      <td><?php echo $hospital->getCountry();?></td>
+		      <td><a target="_blank" href="/hospital/view?id=<?php echo $hospital->getId();?>">详情</a></td>
+			  <td><a href="#myModal<?php echo $hospital->getId();?>" role="button"  data-toggle="modal" >取消推荐</a></td>
+		       </tr>
+<!-- Modal -->
+<div id="myModal<?php echo $hospital->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">取消对<?php echo $hospital->getName();?>的推荐</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定取消对<?php echo $hospital->getName();?>的推荐吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $hospital->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $hospital->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/costperf/hospitalcancel",
+				data:"did=<?php echo $did;?>&hid=<?php echo $hospital->getId();?>",
+				success:
+					location.reload(),
+					
+			});
+		});
+});
+
+</script>
+		      <?php }?>		   
+		    <?php }else{?>
+		   	<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+		    <?php }?>
+		  </tbody>
+		</table>
+		
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

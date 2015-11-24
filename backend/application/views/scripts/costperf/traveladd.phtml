@@ -1,0 +1,149 @@
+<?php $hmsg = @$_GET['hmsg']?:"";$did = $this->did;$travels = $this->travels;?>
+<div class="header"> 
+	<h1 class="page-title">新增热门项目<?php if($hmsg){echo "<span style='color:red;'>".$hmsg."</span>";}?>推荐行程</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/costperf/detail">热门项目列表</a> <span class="divider">/</span></li>
+	<li><a href="/costperf/view?id=<?php echo $this->did;?>">热门项目详情</a> <span class="divider">/</span></li>
+	<li class="active">新增热门项目推荐行程</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<label>根据行程地区查找</label>
+		<form class="form-search">
+			<input type="text" class="input-medium search-query" name="area">
+			<input type="hidden" id="inputId" class="span8" name="id" value="<?php echo $did;?>">
+			<input type="hidden" id="inputHmsg" class="span8" name="hmsg" value="<?php echo $hmsg;?>">
+			<button type="submit" class="btn">搜索</button>
+		</form>	
+		<label>根据行程标题查找</label>
+		<form class="form-search">
+			<input type="text" class="input-medium search-query" name="title">
+			<input type="hidden" id="inputId" class="span8" name="id" value="<?php echo $did;?>">
+			<input type="hidden" id="inputHmsg" class="span8" name="hmsg" value="<?php echo $hmsg;?>">
+			<button type="submit" class="btn">搜索</button>
+		</form>		
+		
+		<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>类型</th>
+		      <th>标题</th>
+		      <th>位置</th>
+		      <th>成人原价</th> 
+		      <th>成人现价</th>
+		      <th>儿童原价</th>
+		      <th>儿童现价</th>
+		      <th>地区</th>   
+		      <th>已卖票数</th>  
+		      <th>详情</th>
+		      <th>推荐</th>     
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <?php if(count($travels)>0){?>
+		  <?php foreach ($travels as $record){
+		  	$tid = $record['id'];
+		  	$exists = Yy_Utils::getMapByDepartIdAndTid($did,$tid);
+// 		  	if($exists){
+// 		  		continue;
+// 		  	}
+		  ?> <!-- 查看是否已经推荐 -->
+		  
+		  
+		  <tr>
+		  	  <td><?php echo Yy_Utils::getTravelType($record['type']);?></td>
+			  <td><?php echo mb_substr($record['title'], 0,18,'utf-8');?></td>
+			  <td><?php echo Yy_Utils::getTravelLType($record['location_type']);?></td>
+			  <td><?php echo $record['adult_oprice'];?></td>
+			  <td><?php echo $record['adult_dprice'];?></td>
+			  <td><?php echo $record['child_oprice'];?></td>
+			  <td><?php echo $record['child_dprice'];?></td>
+			  <td><?php echo $record['area'];?></td>
+			  <td><?php echo $record['sales'];?></td>
+			  <td><a href="/travel/view?id=<?php echo $record['id'];?>">详情</a></td>
+			  <?php if(!$exists){?>
+			  <td><a href="#myModal<?php echo $record['id'];?>" role="button"  data-toggle="modal" >推荐</a></td>
+			  <?php }else{?>
+			  <td><a href="#" class="disabled btn">已推荐</a></td>
+			  <?php }?>
+		  </tr>
+
+<?php if(!$exists){?>		  
+<!-- Modal -->
+<div id="myModal<?php echo $record['id'];?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">新增到<?php echo $record['area'];?>的行程推荐</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定新增到<?php echo $record['area'];?>的行程推荐吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $record['id'];?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $record['id'];?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/costperf/traveladdajax",
+				data:"did=<?php echo $did;?>&tid=<?php echo $record['id'];?>",
+				success:
+					location.reload(),
+					
+			});
+		});
+});
+
+</script>		  
+<?php }?>		  
+		  
+
+		  <?php }?>
+		  <?php }else{?>
+		  <tr>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+			  <td>...</td>
+		  </tr>	
+		  <?php }?>	  
+		  
+		  </tbody>
+		  </table>
+		  
+		  <div class="pagination" style="text-align: center;">
+		  <ul>
+		  <?php if($travels->getCurrentPageNumber()<=1){ ?>
+		  <li><a href="/destination/traveladd?id=<?php echo $did;?>&hmsg=<?php echo $hmsg;?>&page=<?php echo $travels->getCurrentPageNumber();?>" class="disabled btn"> 前一页 </a></li>
+		  <?php }else{?>
+		  <li><a href="/destination/traveladd?id=<?php echo $did;?>&hmsg=<?php echo $hmsg;?>&page=<?php echo $travels->getCurrentPageNumber() - 1;?>"> 前一页 </a></li>
+		  <?php }?>
+		    
+		  <?php if($travels->getCurrentPageNumber()>=$travels->count()){ ?> 
+		  <li><a href="/destination/traveladd?id=<?php echo $did;?>&hmsg=<?php echo $hmsg;?>&page=<?php echo $travels->getCurrentPageNumber();?>" class="disabled btn"> 后一页</a></li>
+		  <?php }else{ ?> 
+		  <li><a href="/destination/traveladd?id=<?php echo $did;?>&hmsg=<?php echo $hmsg;?>&page=<?php echo $travels->getCurrentPageNumber() + 1;?>"> 后一页</a></li>		  
+		  <?php }?>
+		  </ul>
+		</div>	
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

@@ -1,0 +1,173 @@
+<?php $hospital = $this->hospital;?>
+<div class="header">
+	<h1 class="page-title">修改医院信息</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/hospital/detail">医院列表</a> <span class="divider">/</span></li>
+	<li class="active">修改医院信息</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+
+<br />
+<form class="form-horizontal" action="/hospital/asyncajax" method="post" enctype="multipart/form-data">
+
+ <input type="hidden" id="inputId" placeholder="<?php echo $hospital->getId();?>" class="span8" name="id" value="<?php echo $hospital->getId();?>">
+
+  
+  <div class="control-group">
+    <label class="control-label" for="inputName">姓名</label>
+    <div class="controls">
+      <input type="text" id="inputName" placeholder="<?php echo $hospital->getName();?>" class="span8" name="name">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputFile">头像</label>
+    <div class="controls">
+      <input type="file" id="inputFile" class="span8" name="avatar">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputEmail">邮箱</label>
+    <div class="controls">
+      <input type="text" id="inputEmail" placeholder="<?php echo $hospital->getEmail();?>" class="span8" name="email">
+    </div>
+  	</div>
+  	
+  	
+  <div class="control-group">
+    <label class="control-label" for="inputDepartments">特色科室</label>
+    <div class="controls">
+      <input type="text" id="inputDepartments" placeholder="<?php echo $hospital->getDepartments();?>" class="span8" name="departments">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputPasswd">密码</label>
+    <div class="controls">
+      <input type="password" id="inputPasswd" placeholder="输入该值进行改密码操作" class="span8" name="passwd" >
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <label class="control-label" for="inputType">医院类型</label>
+    <div class="controls">
+      <input type="text" id="inputType" placeholder="<?php echo $hospital->getType();?>" class="span8" name="type">
+    </div>
+  </div>
+  
+    <?php $cert = $hospital->getCertified();?>
+   <div class="control-group">
+    <label class="control-label" for="inputCertified">认证级别</label>
+    <div class="controls">
+     <select id="inputCertified" name="certified" class="span8">
+	  <option value ="1" <?php if($cert == 1){echo "selected='selected'";}?>>★</option>
+	  <option value ="2" <?php if($cert == 2){echo "selected='selected'";}?>>★★</option>
+	  <option value ="3" <?php if($cert == 3){echo "selected='selected'";}?>>★★★</option>
+	  <option value ="4" <?php if($cert == 4){echo "selected='selected'";}?>>★★★★</option>
+	  <option value ="5" <?php if($cert == 5){echo "selected='selected'";}?>>★★★★★</option>
+	</select>
+    </div>
+   </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputCity">城市</label>
+    <div class="controls">
+      <input type="text" id="inputCity" placeholder="<?php echo $hospital->getCity();?>" class="span8" name="city">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputLabel">标签</label>
+    <div class="controls">
+      <input type="text" id="inputLabel" placeholder="<?php echo $hospital->getLabel();?>" class="span8" name="label">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputCountry">国家</label>
+    <div class="controls">
+      <input type="text" id="inputCountry" placeholder="<?php echo $hospital->getCountry();?>" class="span8" name="country">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputPoint">积分</label>
+    <div class="controls">
+      <input type="text" id="inputPoint" placeholder="<?php echo $hospital->getPoint();?>" class="span8" name="point">
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <label class="control-label" for="inputArea">所属洲</label>
+    <div class="controls">
+      <input type="text" id="inputArea" placeholder="<?php echo $hospital->getArea();?>" class="span8" name="area">
+    </div>
+  </div>
+ 
+    <div class="control-group">
+    <label class="control-label" for="textareaIntroduction">简介</label>
+    <div class="controls">
+      <textarea id="textareaIntroduction" class="textbox span8" placeholder="<?php echo $hospital->getIntroduction();?>" name="introduction"></textarea>
+    </div>
+  	</div> 
+  	 
+    <div class="control-group">
+    <label class="control-label" for="inputLongitude">经度</label>
+    <div class="controls">
+      <input type="text" id="inputLongitude" placeholder="<?php echo $hospital->getLongitude();?>" class="span8" name="longitude">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="inputLatitude">纬度</label>
+    <div class="controls">
+      <input type="text" id="inputLatitude" placeholder="<?php echo $hospital->getLatitude();?>" class="span8" name="latitude">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputStatus">状态</label>
+    <div class="controls">
+     <select id="inputStatus" name="status" class="span8">
+     <?php $status = $hospital->getStatus();
+     if($status == 1){
+     ?>
+	  <option value ="1" selected="selected">正常</option>
+	  <option value ="0">禁用</option>
+	  <?php }else{?>
+	  <option value ="1">正常</option>
+	  <option value ="0" selected="selected">禁用</option>
+	  <?php }?>
+	</select>
+    </div>
+  </div>
+  
+  
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">保存</button>
+      <button type="reset" class="btn">重置</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+		<footer>
+			<hr>
+			<p class="pull-right">虹桥医游网移动互联网项目</p>
+			<p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com"
+					target="_blank">虹桥医游网</a>
+			</p>
+		</footer>
+
+	</div>
+</div>

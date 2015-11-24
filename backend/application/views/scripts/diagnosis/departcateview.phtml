@@ -1,0 +1,62 @@
+<?php 
+$cate = $this->cate;
+$from	= @$_GET['from'];
+$did	= @$_GET['did'];
+?>
+<div class="header"> 
+	<h1 class="page-title">会诊申请手术分类详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/diagnosis/departcatedetail">会诊申请手术分类列表</a> <span class="divider">/</span></li>
+	<li class="active">会诊申请手术分类详情</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($cate){?>
+		<table class="table table-bordered table-hover">
+<!--		
+		<tr>
+		<td>编号</td>
+		<td><?php echo $cate->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<td style="width:10%">分类名</td>
+		<td><?php echo $cate->getName();?></td>
+		</tr>
+
+		<tr>
+		<td>排序</td>
+		<td><?php echo $cate->getSort();?></td>
+		</tr>
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $cate->getCtime();?></td>
+		</tr>
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $cate->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($cate->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+<div style="width: 20%;">
+		<?php if($did){?>
+			<a href="/diagnosis/departcateupdate?id=<?php echo $cate->getId();?>&from=<?php echo $from;?>&did=<?php echo $did;?>" class="btn btn-block">是否修改？</a>
+		<?php }else{?>	
+			<a href="/diagnosis/departcateupdate?id=<?php echo $cate->getId();?>&from=<?php echo $from;?>" class="btn btn-block">是否修改？</a>
+		<?php }?>
+</div>			
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

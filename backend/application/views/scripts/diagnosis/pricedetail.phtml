@@ -1,0 +1,93 @@
+<?php $prices = $this->prices;?>
+<div class="header"> 
+	<h1 class="page-title">全球会诊价格列表</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li class="active">全球会诊价格列表</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+				<table class="table table-bordered table-hover">
+		<caption></caption>
+		  <thead>
+		    <tr>
+		      <th>标题</th>
+		      <th>内容</th> 
+		      <th>排序</th>
+		      <th>类型</th>
+		      <th>状态</th>
+		      <th>详情</th>   
+		      <th>修改</th>
+		      <th>删除</th>  
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <?php if(count($prices)>0){?>
+		    
+		    <?php foreach ($prices as $price){?>
+		    <tr>
+		      <td><?php echo $price->getTitle();?></td>
+		      <td><?php echo mb_substr($price->getContent(), 0,30,'utf-8');?>......</td>
+		      <td><?php echo $price->getSort();?></td>
+		      <td><?php echo Yy_Utils::getConsultByType($price->getType());?></td>
+		      <td><?php if($price->getStatus() == 1){echo "正常";}else{echo "禁用";}?></td>
+		      <td><a href="/diagnosis/priceview?id=<?php echo $price->getId();?>">详情</a></td>
+		      <td><a href="/diagnosis/priceupdate?id=<?php echo $price->getId();?>">修改</a></td>
+		     <td><a href="#myModal<?php echo $price->getId();?>" role="button"  data-toggle="modal" >删除</a></td>
+		       </tr>
+<!-- Modal -->
+<div id="myModal<?php echo $price->getId();?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除（<?php echo $price->getTitle();?>）</h3>
+  </div>
+  <div class="modal-body">
+    <p>您确定删除（<?php echo $price->getTitle();?>）吗？</p>
+  </div>
+  <div class="modal-footer">   
+    <button id="id_<?php echo $price->getId();?>" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
+    <button  class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id_<?php echo $price->getId();?>").click(function(){
+		$.ajax({
+				type:"POST",
+				url:"/diagnosis/pricedel",
+				data:"id=<?php echo $price->getId();?>",
+				success:
+					location.reload(),
+					
+			});
+		});
+});
+
+</script>
+		      <?php }?>		   
+		    <?php }else{?>
+		   	<tr>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		      <td>...</td>
+		    </tr>
+		    <?php }?>
+		  </tbody>
+		</table>
+<div style="width:20%">
+<a href="/diagnosis/priceadd" class="btn btn-block">增加全球会诊价格？</a>
+</div>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

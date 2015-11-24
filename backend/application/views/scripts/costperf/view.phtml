@@ -1,0 +1,71 @@
+<?php $depart = $this->depart;?>
+<div class="header"> 
+	<h1 class="page-title">热门项目详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/costperf/detail">热门项目列表</a> <span class="divider">/</span></li>
+	<li class="active">热门项目详情</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($depart){?>
+		<table class="table table-bordered table-hover">
+<!--  	
+		<tr>
+		<td>编号</td>
+		<td><?php echo $depart->getId(); ?></td>
+		</tr>
+-->		
+		<tr>
+		<td style="width:10%">项目名称</td>
+		<td><?php echo $depart->getName();?></td>
+		</tr>
+		<tr>
+		<td>图片</td>
+		<td><img src="/costperf/image?id=<?php echo $depart->getId();?>" height="120" width="120" /></td>
+		</tr>
+		<tr>
+		<td>所属分类</td>
+		<td><?php echo Yy_Utils::getCategoryNameByCID($depart->getCategory_id());?></td>
+		</tr>	
+
+		<tr>
+		<td>排序</td>
+		<td><?php echo $depart->getSort();?></td>
+		</tr>		
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $depart->getCtime();?></td>
+		</tr>	
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $depart->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($depart->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+<div style="width:20%">		
+		<a href="/costperf/update?id=<?php echo $depart->getId();?>" class="btn btn-block">是否修改？</a>
+		<hr />
+		<a href="/costperf/addiadd?id=<?php echo $depart->getId();?>&hmsg=<?php echo $depart->getName();?>" class="btn btn-block">是否增加附加信息？</a>
+		<a href="/costperf/addidetail?id=<?php echo $depart->getId();?>&hmsg=<?php echo $depart->getName();?>" class="btn btn-block">是否查看附加信息？</a>
+		<hr />
+		<a href="/costperf/hospitaladd?id=<?php echo $depart->getId();?>&hmsg=<?php echo $depart->getName();?>" class="btn btn-block">是否增加推荐医院？</a>
+		<a href="/costperf/hospitaldetail?id=<?php echo $depart->getId();?>&hmsg=<?php echo $depart->getName();?>" class="btn btn-block">是否查看推荐医院？</a>
+		<hr />
+		<a href="/costperf/traveladd?id=<?php echo $depart->getId();?>&hmsg=<?php echo $depart->getName();?>" class="btn btn-block">是否增加推荐行程？</a>
+		<a href="/costperf/traveldetail?id=<?php echo $depart->getId();?>&hmsg=<?php echo $depart->getName();?>" class="btn btn-block">是否查看推荐行程？</a>
+</div>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

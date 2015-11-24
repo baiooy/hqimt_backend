@@ -1,0 +1,94 @@
+<?php 
+$tid = $this->tid;
+$ttype = Yy_Utils::getTravelTypeByTravelID($tid);
+$hmsg = @$_GET['hmsg']?:"";
+?>
+<div class="header"> 
+	<h1 class="page-title">
+	<?php 
+	if($hmsg){
+		echo "新增行程<span style='color:red;'>".$hmsg."</span>";
+	}
+	?>
+附加信息</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/travel/detail?type=<?php echo $ttype;?>"><?php echo Yy_Utils::getTravelType($ttype);?>行程列表</a> <span class="divider">/</span></li>
+	<li><a href="/travel/view?id=<?php echo $tid;?>">行程详情</a> <span class="divider">/</span></li>
+	<li class="active">新增行程附加信息</li>
+ </ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<br />
+		<form class="form-horizontal" action="/travel/addiasyncajax" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="inputType" class="span8" name="tid" value="<?php echo $this->tid;?>">
+		<?php if($hmsg){ ?>
+		<input type="hidden" id="inputHmsg" class="span8" name="hmsg" value="<?php echo $hmsg;?>">
+		<?php }?>
+		
+		  <div class="control-group">
+		    <label class="control-label" for="inputTitle">标题</label>
+		    <div class="controls">
+		      <input type="text" id="inputTitle" placeholder="请输入标题" class="span8" name="title">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputContent">内容</label>
+		    <div class="controls">
+		      <textarea id="textareaContent" class="textbox span8" placeholder="请输入内容" name="content"></textarea>
+		    </div>
+		  </div>
+		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputFile">图片</label>
+		    <div class="controls">
+		      <input type="file" id="inputFile" class="span8" name="img">
+		    </div>
+		   </div>
+		  
+		  <div class="control-group">
+		    <label class="control-label" for="inputSort">排序</label>
+		    <div class="controls">
+		      <input type="text" id="inputSort" placeholder="请输入广告排序顺序，数值越小越靠前" class="span8" name="sort">
+		    </div>
+		  </div>
+		  
+		    <div class="control-group">
+		    <label class="control-label" for="inputType">类型</label>
+		    <div class="controls">
+		     <select id="inputType" name="type" class="span8">
+			  <option value ="1" selected="selected">特色</option>
+			  <option value ="2">详情</option>
+			  <option value ="3">费用</option>
+			  <option value ="4">注意事项</option>
+			  <option value ="5">行程</option>
+			</select>
+		    </div>
+		  </div>
+		  		  
+		    <div class="control-group">
+		    <label class="control-label" for="inputStatus">状态</label>
+		    <div class="controls">
+		     <select id="inputStatus" name="status" class="span8">
+			  <option value ="1" selected="selected">正常</option>
+			  <option value ="0">禁用</option>
+			</select>
+		    </div>
+		  </div>
+		    <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">保存</button>
+		      <button type="reset" class="btn">重置</button>
+		    </div>
+		  </div>
+		</form>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

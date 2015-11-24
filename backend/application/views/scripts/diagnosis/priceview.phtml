@@ -1,0 +1,61 @@
+<?php $price = $this->price;?>
+<div class="header"> 
+	<h1 class="page-title">全球会诊价格详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/diagnosis/pricedetail">全球会诊价格列表</a> <span class="divider">/</span></li>
+	<li class="active">全球会诊价格详情</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($price){?>
+		<table class="table table-bordered table-hover" >
+<!--  
+		<tr>
+		<td style="width:10%">编号</td>
+		<td><?php echo $price->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<td style="width:10%">标题</td>
+		<td><?php echo $price->getTitle();?></td>
+		</tr>
+		<tr>
+		<td>内容</td>
+		<td><?php echo $price->getContent();?></td>
+		</tr>
+		<tr>
+		<td>类型</td>
+		<td><?php echo Yy_Utils::getConsultByType($price->getType());?></td>
+		</tr>		
+		<tr>
+		<td>排序</td>
+		<td><?php echo $price->getSort();?></td>
+		</tr>
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $price->getCtime();?></td>
+		</tr>
+		<tr>
+		<td>更新时间</td>
+		<td><?php echo $price->getUtime();?></td>
+		</tr>
+		<tr>
+		<td>状态</td>
+		<td><?php if($price->getStatus()==1){echo "正常";}else{echo "禁用";}?></td>
+		</tr>
+		</table>
+		<div style="width:20%">
+		<a href="/diagnosis/priceupdate?id=<?php echo $price->getId();?>" class="btn btn-block">是否修改？</a>
+		</div>
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>

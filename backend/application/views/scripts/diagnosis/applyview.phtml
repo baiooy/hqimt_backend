@@ -1,0 +1,75 @@
+<?php $apply = $this->apply;?>
+<div class="header"> 
+	<h1 class="page-title">全球会诊申请详情</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="/index/index">Home</a> <span class="divider">/</span></li>
+	<li><a href="/diagnosis/applydetail">全球会诊申请列表</a> <span class="divider">/</span></li>
+	<li class="active">全球会诊申请详情</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- content -->
+		<?php if($apply){?>
+		<table class="table table-bordered table-hover" >
+<!--  		
+		<tr>
+		<td style="width:10%">编号</td>
+		<td><?php echo $apply->getId(); ?></td>
+		</tr>
+-->
+		<tr>
+		<td style="width:10%">项目类型</td>
+		<td><?php echo Yy_Utils::getConsultationDepartmentsCategoryNameByCID($apply->getDepartment_category_id());?></td>
+		</tr>
+		<tr>
+		<td>手术项目</td>
+		<td><?php echo Yy_Utils::getConsultationDepartmentNameByDID($apply->getDepartment_id());?></td>
+		</tr>
+		<tr>
+		<td>邮箱</td>
+		<td><?php echo $apply->getEmail();?></td>
+		</tr>
+		<tr>
+		<td>手机</td>
+		<td><?php echo $apply->getMobile();?></td>
+		</tr>
+		<tr>
+		<td>年龄</td>
+		<td><?php echo $apply->getAge();?></td>
+		</tr>
+		<tr>
+		<td>性别</td>
+		<td><?php echo Yy_Utils::getSex($apply->getSex());?></td>
+		</tr>
+		<tr>
+		<td>位置</td>
+		<td><?php echo $apply->getLocation();?></td>
+		</tr>
+		<tr>
+		<td>何时治疗</td>
+		<td><?php echo $apply->getTreatment_time();?></td>
+		</tr>
+		<tr>
+		<td>建议和想法</td>
+		<td><?php echo $apply->getOpinion();?></td>
+		</tr>
+		<tr>
+		<td>报告/病例</td>
+		<td><a target="_blank" href="/diagnosis/applyimage?id=<?php echo $apply->getId();?>"><img src="/diagnosis/applyimage?id=<?php echo $apply->getId();?>" height="120" width="120" /></a></td>
+		</tr>
+		<tr>
+		<td>创建时间</td>
+		<td><?php echo $apply->getCtime();?></td>
+		</tr>
+		</table>
+
+		<?php }?>
+        <footer>
+        	<hr>
+            <p class="pull-right">虹桥医游网移动互联网项目</p>
+            <p>&copy; <?php echo date('Y');?> <a href="http://www.hqimt.com" target="_blank">虹桥医游网</a></p>
+        </footer>
+                    
+     </div>
+</div>
